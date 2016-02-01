@@ -2,6 +2,10 @@
 namespace MidoriKocak\ConceptsAlgorithms;
 
 
+/**
+ * Class ArraysStrings
+ * @package MidoriKocak\ConceptsAlgorithms
+ */
 class ArraysStrings
 {
 
@@ -66,6 +70,108 @@ class ArraysStrings
         }
         $checker |= (1 << $value);
         return true;
+    }
+
+    /**
+     * @param String $string
+     * @return string
+     */
+    public function reverse(String $string)
+    {
+        $reverse = "";
+        if ($string != "") {
+            for ($i = strlen($string) - 1; $i >= 0; $i--) {
+                $reverse .= $string[$i];
+            }
+        }
+        return $reverse;
+    }
+
+    /**
+     * @param $word
+     * @return array
+     */
+    private function makeArray($word)
+    {
+        $uniqueArray = [];
+        $cleanedWord = $this->cleanWord($word);
+        for ($i = 0; $i < strlen($cleanedWord); $i++) {
+            if (isset($uniqueArray[$cleanedWord[$i]])) {
+                $uniqueArray[$cleanedWord[$i]]++;
+            } else {
+                $uniqueArray[$cleanedWord[$i]] = 1;
+            }
+        }
+        return $uniqueArray;
+    }
+
+
+    /**
+     * @param String $word1
+     * @param String $word2
+     * @return bool
+     */
+    public function checkPermutation(String $word1, String $word2)
+    {
+        $array1 = $this->makeArray($word1);
+        $array2 = $this->makeArray($word2);
+        if ($array1 == $array2) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param String $string
+     */
+    public function replaceSpaces(String $string)
+    {
+        $spaceCount = 0;
+        $newLength = strlen($string);
+
+        // first pass for counting spaces
+        for ($i = 0; $i < strlen($string); $i++) {
+            if ($string[$i] == " ") {
+                $spaceCount++;
+            }
+        }
+
+        $newLength += ($spaceCount * 2);
+
+        for ($j = strlen($string) - 1; $i >= 0; $i--) {
+            if ($string[$j] == " ") {
+                $string[$newLength - 1] = "0";
+                $string[$newLength - 2] = "2";
+                $string[$newLength - 3] = "%";
+
+                $newLength -= 3;
+            } else {
+                $string[$newLength - 1] = $string[$j];
+                $newLength -= 1;
+            }
+        }
+    }
+
+    public function compressBad(String $string)
+    {
+        $result = "";
+        $last = $string[0];
+        $count = 1;
+        for ($i = 1; $i < strlen($string); $i++) {
+            if ($string[$i] == $last) {
+                $count++;
+            } else {
+                $result += $last + $count;
+                $last = $string[$i];
+                $count = 1;
+            }
+        }
+        return $result . $last . $count;
+    }
+
+    public function compressBetter(String $string)
+    {
+
     }
 
 }
