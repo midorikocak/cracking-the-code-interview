@@ -1,0 +1,29 @@
+{ "name": "midorikocak/cracking-the-coding-interview",
+    "description": "Examples from the book 'Cracking the coding Interview (5'th Edition)'",
+    "license": "MIT",
+    "keywords": ["algorithms","data structures", "open", "source", "interview", "coding"],
+    "authors": [
+        {
+            "name": "Midori Kocak",
+            "email": "mtkocak@gmail.com"
+        }
+    ],
+    "require": {
+        "mtkocak/algorithms": "dev-master"
+    },
+	"require-dev": {
+		"phpunit/phpunit": "5.1.*"
+	},
+    "config": {
+        "bin-dir": "bin/",
+        "preferred-install": "dist"
+    },
+    "autoload": {
+		"psr-4": {
+			"MidoriKocak\\": "src"
+		},
+		"psr-0": {
+		"MidoriKocakTest\\": "tests/"
+	}
+    }
+}
