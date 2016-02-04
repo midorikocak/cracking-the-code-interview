@@ -7,6 +7,10 @@ namespace MidoriKocak\ConceptsAlgorithms;
  * Class ArraysStrings
  * @package MidoriKocak\ConceptsAlgorithms
  */
+/**
+ * Class ArraysStrings
+ * @package MidoriKocak\ConceptsAlgorithms
+ */
 class ArraysStrings
 {
 
@@ -197,6 +201,10 @@ class ArraysStrings
         return $string;
     }
 
+    /**
+     * @param String $string
+     * @return string
+     */
     public function compressBad(String $string)
     {
         $result = "";
@@ -226,6 +234,10 @@ class ArraysStrings
     }
     */
 
+    /**
+     * @param array $array
+     * @return array
+     */
     public function rotateMatrix(Array $array){
         $size = sizeof($array[0]);
         $rotatedArray = [];
@@ -238,6 +250,10 @@ class ArraysStrings
         return $rotatedArray;
     }
 
+    /**
+     * @param array $matrix
+     * @return array
+     */
     public function setZeros(Array $matrix){
         $row = [];
         $column = [];
@@ -262,6 +278,11 @@ class ArraysStrings
         return $matrix;
     }
 
+    /**
+     * @param String $word1
+     * @param String $word2
+     * @return bool
+     */
     public function isRotation(String $word1, String $word2){
         $len = strlen($word1);
 
