@@ -1,7 +1,7 @@
 <?php
 use MidoriKocak\ConceptsAlgorithms\ArraysStrings;
 
-class ArraysStringsTest extends PHPUnit_Framework_TestCase
+class ArraysStringsTest extends \PHPUnit_Framework_TestCase
 {
 
     public $object;
