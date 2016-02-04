@@ -122,13 +122,56 @@ class ArraysStrings
     }
 
     /**
+     * @param String $word1
+     * @param String $word2
+     * @return bool
+     */
+    public function checkPermutation2(String $word1, String $word2)
+    {
+        $stringArray1 = str_split($word1);
+        $stringArray2 = str_split($word2);
+        if (sort($stringArray1) == sort($stringArray2)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * @param String $word1
+     * @param String $word2
+     * @return bool
+     */
+    public function checkPermutation3(String $word1, String $word2)
+    {
+        if(strlen($word1)!=strlen($word2)){
+            return false;
+        }
+
+        $charArray = [];
+        for($i = 0; $i<strlen($word1); $i++){
+            if(!isset($charArray[$word1[$i]])){
+                $charArray[$word1[$i]]=1;
+            }else{
+                $charArray[$word1[$i]]++;
+            }
+        }
+        for($j = 0; $j<strlen($word2); $j++){
+            if(--$charArray[$word2[$j]]>0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * @param String $string
      */
     public function replaceSpaces(String $string)
     {
         $spaceCount = 0;
         $newLength = strlen($string);
-
         // first pass for counting spaces
         for ($i = 0; $i < strlen($string); $i++) {
             if ($string[$i] == " ") {
@@ -138,7 +181,7 @@ class ArraysStrings
 
         $newLength += ($spaceCount * 2);
 
-        for ($j = strlen($string) - 1; $i >= 0; $i--) {
+        for ($j = strlen($string) - 1; $j >= 0; $j--) {
             if ($string[$j] == " ") {
                 $string[$newLength - 1] = "0";
                 $string[$newLength - 2] = "2";
@@ -150,6 +193,7 @@ class ArraysStrings
                 $newLength -= 1;
             }
         }
+        return $string;
     }
 
     public function compressBad(String $string)
@@ -161,7 +205,7 @@ class ArraysStrings
             if ($string[$i] == $last) {
                 $count++;
             } else {
-                $result += $last + $count;
+                $result .= $last . $count;
                 $last = $string[$i];
                 $count = 1;
             }
@@ -169,9 +213,62 @@ class ArraysStrings
         return $result . $last . $count;
     }
 
+    /* I did not understand the remaining solutions.
     public function compressBetter(String $string)
     {
 
+    }
+
+    public function compressAlternate(String $string)
+    {
+
+    }
+    */
+
+    public function rotateMatrix(Array $array){
+        $size = sizeof($array[0]);
+        $rotatedArray = [];
+        for($column = 0; $column<$size; $column++){
+            for($row = $size-1; $row >=0 ; $row--){
+                $elementToCopy = $array[$row][$column];
+                $rotatedArray[$column][$size-$row-1] = $elementToCopy;
+            }
+        }
+        return $rotatedArray;
+    }
+
+    public function setZeros(Array $matrix){
+        $row = [];
+        $column = [];
+
+        // Traverse Matrix
+        for($i = 0; $i<sizeof($matrix);$i++){
+            for($j=0;$j<sizeof($matrix[$i]);$j++){
+                if($matrix[$i][$j]==0){
+                    $row[$i] = true;
+                    $column[$j] = true;
+                }
+            }
+        }
+
+        for($i = 0; $i<sizeof($matrix);$i++) {
+            for ($j = 0; $j < sizeof($matrix[$i]); $j++) {
+                if($row[$i] || $column[$j]){
+                    $matrix[$i][$j] = 0;
+                }
+            }
+        }
+        return $matrix;
+    }
+
+    public function isRotation(String $word1, String $word2){
+        $len = strlen($word1);
+
+        if($len == strlen($word2) && $len > 0){
+            $word1word2 = $word1.$word2;
+            return (strpos($word1word2, $word2)!= false);
+        }
+        return false;
     }
 
 }
