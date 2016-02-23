@@ -165,4 +165,22 @@ class LinkedListsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->object->partition2($this->unsorted->bottom, 5) == $this->partitioned2->bottom);
     }
+
+    /**
+     * 2.5 You have two numbers represented by a linked list, where each node contains a
+     * single digit. The digits are stored in reverse order, such that the 1 's digit is at the head
+     * of the list. Write a function that adds the two numbers and returns the sum as a
+     * linked list.
+     *
+     * unsorted 75238961 partitioned2 698751324 sum 773990285
+     *
+     * FOLLOW UP
+     * Suppose the digits are stored in forward order. Repeat the above problem.
+     * unsorted 16983257 partitioned2 423157896 sum 440141153
+     *
+     */
+    public function testAddLists()
+    {
+        $this->assertTrue(true);
+    }
 }

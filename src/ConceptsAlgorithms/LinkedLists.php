@@ -229,4 +229,12 @@ class LinkedLists
 
         return $head;
     }
+
+    public function addLists(DataStructures\SingleLinkedListNode $node1, DataStructures\SingleLinkedListNode $node2, $carry){
+
+    }
+
+    public function addLists2(DataStructures\SingleLinkedListNode $node1, DataStructures\SingleLinkedListNode $node2, $carry){
+
+    }
 }
