@@ -9,7 +9,10 @@
 namespace MidoriKocak\UpWork;
 
 
-class Teaser {
+class Teaser
+{
+
+    private static $stopChars = [" ", "\n", "\t", ".", ":", "!", ";", ","];
 
     /**
      * makeTeaser returns a cleanly truncated teaser string from the
@@ -29,7 +32,7 @@ class Teaser {
      * Content:
      * I quickly learned how fishy this world could be. A client I knew who
      * specialized in auto loans invited me up to his desk to show me how
-     * to structure subprime debt. Eager to please, I promised I could
+     * to structure subprime debt. Eager to please, I promi
      * enhance my software to model his deals in less than a month. But when
      * I glanced at the takeout in the deal, I couldn't believe my eyes.
      *
@@ -46,7 +49,35 @@ class Teaser {
      * @param $maxLength - Number, Maximum length of the teaser, optional. * If not set, maxLength = minLength+50
      * @return String Teaser That will be displayed
      */
-    public static function makeTeaser($content, $url, $linkText, $minLength, $maxLength=NULL)
+    public static function makeTeaser($content, $url, $linkText, $minLength, $maxLength = NULL)
     {
+        if ($maxLength == NULL) {
+            $maxLength = $minLength + 50;
+        }
+        $firstSubstring = substr($content, 0, $maxLength);
+        $substring = substr($firstSubstring, 0, self::findStopCharacter($firstSubstring));
+        return $substring.self::makeLink($url,$linkText);
+    }
+
+    static function makeLink($url, $linkText)
+    {
+        return "<a href='" . $url . "'>" . $linkText . "</a>";
+    }
+
+    static function findStopCharacter($string)
+    {
+        $minVal = strrpos($string, self::$stopChars[0]);
+        for ($i = 0; $i < sizeof(self::$stopChars); $i++) {
+            if ($i != 0) {
+                $newMinVal = strrpos($string, self::$stopChars[$i]);
+                if ($newMinVal > $minVal) {
+                    $minVal = $newMinVal;
+                }
+            }
+        }
+        if ($minVal === false) {
+            $minVal = strlen($string);
+        }
+        return $minVal;
     }
 } 
